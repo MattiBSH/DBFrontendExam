@@ -10,6 +10,8 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
+import { FaSwimmer } from 'react-icons/fa';
+
 const { createMemoryHistory } = require("history");
 
 
@@ -32,10 +34,18 @@ const App = () => {
   return (
     <div>
       <BrowserRouter location={history.location} navigator={history}>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav class="navbar navbar-dark bg-primary">
         <Link to={"/"} className="navbar-brand">
           Swimming Club
         </Link>
+        <FaSwimmer  size="80" color={"white"}/>
+        <div style={{
+          width:((window.innerWidth /2)-270),
+    display: 'flex',
+    alignItems: 'left',
+    justifyContent: 'left',
+}}>
+</div>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/home"} className="nav-link">
@@ -64,6 +74,7 @@ const App = () => {
             </li>
           )}
         </div>
+        
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
