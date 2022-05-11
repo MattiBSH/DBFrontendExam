@@ -1,8 +1,5 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
 const required = (value) => {
   if (!value) {
@@ -33,8 +30,7 @@ const Login = () => {
     e.preventDefault();
     setMessage("");
     setLoading(true);
-    form.current.validateAll();
-    if (checkBtn.current.context._errors.length === 0) {
+   
       AuthService.login(username, password).then(
         () => {
           navigate("/profile");
@@ -51,9 +47,7 @@ const Login = () => {
           setMessage(resMessage);
         }
       );
-    } else {
-      setLoading(false);
-    }
+  
   };
   return (
     <div className="col-md-12">
@@ -63,27 +57,25 @@ const Login = () => {
           alt="profile-img"
           className="profile-img-card"
         />
-        <Form onSubmit={handleLogin} ref={form}>
+        <form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <Input
+            <input
               type="text"
               className="form-control"
               name="username"
               value={username}
               onChange={onChangeUsername}
-              validations={[required]}
             />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <Input
+            <input
               type="password"
               className="form-control"
               name="password"
               value={password}
               onChange={onChangePassword}
-              validations={[required]}
             />
           </div>
           <div className="form-group">
@@ -101,8 +93,8 @@ const Login = () => {
               </div>
             </div>
           )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
-        </Form>
+          <button style={{ display: "none" }} ref={checkBtn} />
+        </form>
       </div>
     </div>
   );
