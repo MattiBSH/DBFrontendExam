@@ -21,12 +21,21 @@ const getAllUsers = () => {
 const deleteUser = (email) => {
   return axios.delete(API_URL_USER + "delete/", { headers: authHeader(),params: { email:email }});
 };
+const getAllArrangements = () => {
+  return axios.get(API_URL_USER + "allArrangements", { headers: authHeader() });
+};
+const deleteArrangements = (id) => {
+  return axios.delete(API_URL_USER + "arrangement/delete/", { headers: authHeader(),params: { id:id }});
+};
 const UserService = {
   getPublicContent,
   getUserBoard,
   getModeratorBoard,
   getAdminBoard,
   getAllUsers,
-  deleteUser
+  deleteUser,
+  getAllArrangements,
+  deleteArrangements
+  
 };
 export default UserService;
