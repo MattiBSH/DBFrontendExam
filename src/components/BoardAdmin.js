@@ -24,7 +24,7 @@ const BoardAdmin = () => {
     setuserIds(userIds);
   };
 
-  const handlePost = (e) => {
+  const handlePost= async (e) => {
     e.preventDefault();
     setMessage("");
     setSuccessful(false);
@@ -32,7 +32,7 @@ const BoardAdmin = () => {
     var ids=userIds.split(',').map(function(item) {
       return parseInt(item, 10);
   });
-      UserService.arrangementPost(name, type, ids).then(
+      await UserService.arrangementPost(name, type, ids).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
@@ -48,6 +48,19 @@ const BoardAdmin = () => {
           setSuccessful(false);
         }
       );
+      UserService.getAllArrangements().then(
+        (response) => {
+          setArrangements(response.data);
+        },
+        (error) => {
+          const _content =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          setContent(_content);
+        });
     
   };
 
@@ -144,6 +157,7 @@ const BoardAdmin = () => {
         <h3>{content}</h3>
         
       </header>
+      <h4>All users in system</h4>
       <table className="table">
         <thead>
                     <tr>
@@ -161,6 +175,7 @@ const BoardAdmin = () => {
                 </tr>}):""}
                 
         </table>
+        <h4>All current Events</h4>
         <table className="table">
         <thead>
                     <tr>
@@ -181,8 +196,8 @@ const BoardAdmin = () => {
         </table>
         <div className="col-md-12">
       <div className="card card-container">
-        <h3>Make Arrangement</h3>
-        <form onSubmit={handlePost} ref={form}>
+        <h4>Make Event</h4>
+        <form onSubmit={handlePost}>
           {!successful && (
             <div>
               <div className="form-group">
