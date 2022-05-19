@@ -11,6 +11,7 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import { FaSwimmer } from 'react-icons/fa';
+import Forum from "./components/Forum";
 
 const { createMemoryHistory } = require("history");
 
@@ -73,6 +74,13 @@ const App = () => {
               </Link>
             </li>
           )}
+          {currentUser && (
+            <li className="nav-item">
+            <Link to={"/forum"} className="nav-link">
+                Forum
+              </Link>
+            </li>
+          )}
         </div>
         
         {currentUser ? (
@@ -106,6 +114,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/home" element={<Home/>} />
+          <Route path="/forum" element={<Forum user={currentUser}/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />
