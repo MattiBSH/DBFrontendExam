@@ -27,7 +27,6 @@ const Forum = ({user}) => {
     ForumService.getAllPosts().then(
       (response) => {
         setPosts(response.data);
-        console.log(response.data);
       },
       (error) => {
         const _content =
