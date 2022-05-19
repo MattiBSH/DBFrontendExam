@@ -26,7 +26,7 @@ const Forum = ({user}) => {
   useEffect(() => {
     ForumService.getAllPosts().then(
       (response) => {
-        if(response.status!=200){
+        if(response.status==200){
           console.log(response.data)
           setPosts(response.data);
         }
@@ -70,8 +70,8 @@ const Forum = ({user}) => {
         </>
       )}
       <div>
-          {posts.length!=0 ?? posts.map((post)=>{
-              return <Post post={post}/>;},)},
+          {posts.length!=0 && posts.map((post)=>{
+              return <Post post={post}/>;},)}
       </div>
     </div>
   );
