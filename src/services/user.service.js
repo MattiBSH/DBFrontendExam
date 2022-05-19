@@ -21,12 +21,30 @@ const getAllUsers = () => {
 const deleteUser = (email) => {
   return axios.delete(API_URL_USER + "delete/", { headers: authHeader(),params: { email:email }});
 };
+const getAllArrangements = () => {
+  return axios.get(API_URL_USER + "allArrangements", { headers: authHeader() });
+};
+const deleteArrangements = (id) => {
+  return axios.delete(API_URL_USER + "arrangement/delete/", { headers: authHeader(),params: { id:id }});
+};
+
+const arrangementPost = (name, type, userIds) => {
+  return axios.post(API_URL_USER + "arrangement",{id:Math.floor(Math.random() * 100000000000000),name, type, userIds},{
+    headers: authHeader()},
+    
+  );
+};
+
 const UserService = {
   getPublicContent,
   getUserBoard,
   getModeratorBoard,
   getAdminBoard,
   getAllUsers,
-  deleteUser
+  deleteUser,
+  getAllArrangements,
+  deleteArrangements,
+  arrangementPost
+  
 };
 export default UserService;
