@@ -28,8 +28,8 @@ const deleteArrangements = (id) => {
   return axios.delete(API_URL_USER + "arrangement/delete/", { headers: authHeader(),params: { id:id }});
 };
 
-const arrangementPost = (name, type, userIds) => {
-  return axios.post(API_URL_USER + "arrangement",{id:Math.floor(Math.random() * 100000000000000),name, type, userIds},{
+const arrangementPost = (name, type, teamIds,winner,second,third) => {
+  return axios.post(API_URL_USER + "arrangement",{id: Math.floor(Math.random() * 100000000000000), name, type, teamIds,winner,second,third},{
     headers: authHeader()},
     
   );

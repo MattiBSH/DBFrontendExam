@@ -11,17 +11,38 @@ const BoardAdmin = () => {
   const [userIds, setuserIds] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
+  const [winner, setWinner] = useState("");
+  const [second, setSecond] = useState("");
+  const [third, setThird] = useState("");
+  
   const onChangeName = (e) => {
     const name = e.target.value;
     setName(name);
   };
+  
   const onChangeType = (e) => {
     const type = e.target.value;
     setType(type);
   };
+  
   const onChangeUserIds = (e) => {
     const userIds = e.target.value;
     setuserIds(userIds);
+  };
+  
+  const onChangeWinner = (e) => {
+    const winner = e.target.value;
+    setWinner(winner);
+  };
+
+  const onChangeSecond = (e) => {
+    const second = e.target.value;
+    setSecond(second);
+  };
+
+  const onChangeThird = (e) => {
+    const third = e.target.value;
+    setThird(third);
   };
 
   const handlePost = (e) => {
@@ -32,7 +53,7 @@ const BoardAdmin = () => {
     var ids=userIds.split(',').map(function(item) {
       return parseInt(item, 10);
   });
-      UserService.arrangementPost(name, type, ids).then(
+      UserService.arrangementPost(name, type, ids,winner,second,third).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
@@ -167,14 +188,21 @@ const BoardAdmin = () => {
                     <th>ID</th>
                     <th>Name</th>
                     <th>Type</th>
-                    <th>UserIds</th>
+                    <th>Team IDs</th>
+                    <th>First</th>
+                    <th>Second</th>
+                    <th>Third</th>
                     </tr>
                 </thead>
         {arrangements.length!=null?arrangements.map((arrangements)=> {return <tr>
                     <td>{arrangements.id}</td>
                     <td>{arrangements.name}</td>
                     <td>{arrangements.type}</td>
-                    <td>{arrangements.userIds.toString()}</td>
+                    <td>{arrangements.teamIds.toString()}</td>
+                    <td>{arrangements.winner.toString()}</td>
+                    <td>{arrangements.second.toString()}</td>
+                    <td>{arrangements.third.toString()}</td>
+
                     <button onClick={()=>deleteArrangements(arrangements.id)} className="btn-danger btn-block btn-sm">Delete</button>
                 </tr>}):""}
                 
@@ -213,6 +241,36 @@ const BoardAdmin = () => {
                   name="userIds"
                   value={userIds}
                   onChange={onChangeUserIds}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="userIds">Winner ID</label>
+                <input
+                  type="winner"
+                  className="form-control"
+                  name="winner"
+                  value={winner}
+                  onChange={onChangeWinner}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="userIds">Second ID</label>
+                <input
+                  type="second"
+                  className="form-control"
+                  name="second"
+                  value={second}
+                  onChange={onChangeSecond}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="userIds">Third ID</label>
+                <input
+                  type="third"
+                  className="form-control"
+                  name="third"
+                  value={third}
+                  onChange={onChangeThird}
                 />
               </div>
               <div className="form-group">
