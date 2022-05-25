@@ -178,35 +178,38 @@ const BoardAdmin = () => {
     );
     UserService.getStatsTeam1().then(
       (response) => {
-        setWinnerTeam(response.data);
-        console.log(winnerTeam);
+        var sentence= JSON.parse(response.data[0])['p1.name']+", Number of: "+JSON.parse(response.data[0])['num'];
+        setWinnerTeam(sentence);
       }
     );
     UserService.getStatsTeam2().then(
       (response) => {        
-
-        setSecondTeam(response.data);
+        var sentence= JSON.parse(response.data[0])['p1.name']+", Number of: "+JSON.parse(response.data[0])['num'];
+        setSecondTeam(sentence);
       }
     );
     UserService.getStatsTeam3().then(
-      (response) => {        
-        setThirdTeam(response.data);
+      (response) => {    
+        var sentence= JSON.parse(response.data[0])['p1.name']+", Number of: "+JSON.parse(response.data[0])['num'];    
+        setThirdTeam(sentence);
       }
     );
     UserService.getStatsUser1().then(
-      (response) => {        
-
-        setWinnerUser(response.data);
+      (response) => {    
+        var sentence= JSON.parse(response.data[0])['m.name']+", Number of: "+JSON.parse(response.data[0])['num'];
+        setWinnerUser(sentence);
       }
     );
     UserService.getStatsUser2().then(
       (response) => {
-        setSecondUser(response.data);
+        var sentence= JSON.parse(response.data[0])['m.name']+", Number of: "+JSON.parse(response.data[0])['num'];
+        setSecondUser(sentence);
       }
     );
     UserService.getStatsUser3().then(
       (response) => {
-        setThirdUser(response.data);
+        var sentence= JSON.parse(response.data[0])['m.name']+", Number of: "+JSON.parse(response.data[0])['num'];
+        setThirdUser(sentence);
       }
     );
   }, []);
@@ -345,12 +348,12 @@ const BoardAdmin = () => {
       </div>
     </div>
     <h1 align="center">Stats</h1>
-    {winnerUser==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most user wins{winnerUser[0]}</h3>}
-    {secondUser==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most user second{secondUser[0]}</h3>}
-    {thirdUser==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most user third{thirdUser[0]}</h3>}
-    {winnerTeam==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most team wins{winnerTeam[0]}</h3>}
-    {secondTeam==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most team second{secondTeam[0]}</h3>}
-    {thirdTeam==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most team third{thirdTeam[0]}</h3>}
+    {winnerUser==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most user wins: {winnerUser}</h3>}
+    {secondUser==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most user second places: {secondUser}</h3>}
+    {thirdUser==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most user third: {thirdUser}</h3>}
+    {winnerTeam==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most team wins: {winnerTeam}</h3>}
+    {secondTeam==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most team second places: {secondTeam}</h3>}
+    {thirdTeam==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most team third places: {thirdTeam}</h3>}
     <br/>
     <br/>
     <br/>
