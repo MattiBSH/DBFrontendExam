@@ -14,7 +14,12 @@ const BoardAdmin = () => {
   const [winner, setWinner] = useState("");
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
-  
+  const [winnerUser, setWinnerUser] = useState("");
+  const [secondUser, setSecondUser] = useState("");
+  const [thirdUser, setThirdUser] = useState("");
+  const [winnerTeam, setWinnerTeam] = useState("");
+  const [secondTeam, setSecondTeam] = useState("");
+  const [thirdTeam, setThirdTeam] = useState("");
   const onChangeName = (e) => {
     const name = e.target.value;
     setName(name);
@@ -171,13 +176,45 @@ const BoardAdmin = () => {
         setContent(_content);
       }
     );
+    UserService.getStatsTeam1().then(
+      (response) => {
+        setWinnerTeam(response.data);
+        console.log(winnerTeam);
+      }
+    );
+    UserService.getStatsTeam2().then(
+      (response) => {        
+
+        setSecondTeam(response.data);
+      }
+    );
+    UserService.getStatsTeam3().then(
+      (response) => {        
+        setThirdTeam(response.data);
+      }
+    );
+    UserService.getStatsUser1().then(
+      (response) => {        
+
+        setWinnerUser(response.data);
+      }
+    );
+    UserService.getStatsUser2().then(
+      (response) => {
+        setSecondUser(response.data);
+      }
+    );
+    UserService.getStatsUser3().then(
+      (response) => {
+        setThirdUser(response.data);
+      }
+    );
   }, []);
 
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content}</h3>
-        
+        <h3>{content}</h3>  
       </header>
       <h4>All users in system</h4>
       <table className="table">
@@ -194,8 +231,7 @@ const BoardAdmin = () => {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <button onClick={()=>deleteUser(user.type)} className="btn-danger btn-block btn-sm">Delete</button>
-                </tr>}):""}
-                
+                </tr>}):""}                
         </table>
         <h4>All current Events</h4>
         <table className="table">
@@ -308,6 +344,19 @@ const BoardAdmin = () => {
         </form>
       </div>
     </div>
+    <h1 align="center">Stats</h1>
+    {winnerUser==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most user wins{winnerUser[0]}</h3>}
+    {secondUser==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most user second{secondUser[0]}</h3>}
+    {thirdUser==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most user third{thirdUser[0]}</h3>}
+    {winnerTeam==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most team wins{winnerTeam[0]}</h3>}
+    {secondTeam==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most team second{secondTeam[0]}</h3>}
+    {thirdTeam==null && winner.length==0?<h3>Nothing to show</h3>:<h3>Most team third{thirdTeam[0]}</h3>}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
     </div>
   );
 };

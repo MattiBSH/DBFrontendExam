@@ -35,6 +35,25 @@ const arrangementPost = (name, type, teamIds,winner,second,third) => {
   );
 };
 
+const getStatsTeam1 = () => {
+  return axios.get(API_URL_USER + "mostWins/Team", { headers: authHeader() });
+};
+const getStatsTeam2 = () => {
+  return axios.get(API_URL_USER + "mostSecond/Team", { headers: authHeader() });
+};
+const getStatsTeam3 = () => {
+  return axios.get(API_URL_USER + "mostThird/Team", { headers: authHeader() });
+};
+const getStatsUser1 = () => {
+  return axios.get(API_URL_USER + "mostWins/person", { headers: authHeader() });
+};
+const getStatsUser2 = () => {
+  return axios.get(API_URL_USER + "mostSecond/person", { headers: authHeader() });
+};
+const getStatsUser3 = () => {
+  return axios.get(API_URL_USER + "mostThird/person", { headers: authHeader() });
+};
+
 const UserService = {
   getPublicContent,
   getUserBoard,
@@ -44,7 +63,8 @@ const UserService = {
   deleteUser,
   getAllArrangements,
   deleteArrangements,
-  arrangementPost
+  arrangementPost,
+  getStatsTeam1,getStatsTeam2,getStatsTeam3,getStatsUser1,getStatsUser2,getStatsUser3
   
 };
 export default UserService;
