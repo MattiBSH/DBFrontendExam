@@ -45,6 +45,21 @@ const Forum = ({user}) => {
     e.preventDefault();
     await ForumService.makePost(formValue, user);
     setPosting(false);
+    ForumService.getAllPosts().then(
+      (response) => {
+        if(response.status==200){
+          console.log(response.data)
+          setPosts(response.data);
+        }
+      },
+      (error) => {
+        const _content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+        setPosts(_content);
+      }
+    );
   }
 
   return (
